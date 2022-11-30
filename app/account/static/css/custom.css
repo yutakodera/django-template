@@ -1,0 +1,20 @@
+.borderless td, .borderless th {
+    border: none;
+}
+blockquote {
+    border: 1px dashed #999;
+    padding: 0 1em;
+    background-color: #f4f4f4;
+}
+.ads .s100 {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .ads .s250 {
+        display: none;
+    }
+    .ads .s100 {
+        display: block;
+    }
+}
