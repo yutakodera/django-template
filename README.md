@@ -22,20 +22,7 @@ docker-compose exec app python manage.py createsuperuser
 ----
 ### Make a new app
 ```bash
-python -m venv venv
-```
-Linux
-```bash
-source venv/bin/activate
-```
-Win
-```bash
-.\venv\Scripts\activate 
-```
-```bash
-cd app
-pip install -r requirements.txt
-python manage.py startapp <app_name>
+docker-compose exec app python manage.py startapp <app_name>
 ```
 
 ## License
