@@ -3,11 +3,6 @@
 This is a template for Django projects. It is based on the [django-on-docker](https://github.com/dsonoda/django-on-docker) & [django-account-ja](https://github.com/motoitanigaki/django-account-ja) projects.
 
 ## Usage
-### Git clone
-```
-git clone https://github.com/RTa-technology/Django-template.git
-```
-----
 ### Development
 ```bash
 docker-compose up -d --build
