@@ -33,10 +33,8 @@ class SignUpView(generic.CreateView):
 
 
 class ProfileView(LoginRequiredMixin, generic.View):
-
     def get(self, *args, **kwargs):
         return render(self.request,'registration/profile.html')
-
 
 class DeleteView(LoginRequiredMixin, generic.View):
 
