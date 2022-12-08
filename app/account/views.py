@@ -55,7 +55,7 @@ def activate_user(request, activate_token):
             message = 'アクティベーションが失敗しています。管理者に問い合わせてください'
     if not hasattr(activated_user, 'is_active'):
         message = 'エラーが発生しました'
-    return HttpResponse(message)
+    return render(request, 'registration/message.html', {'message': message})
 
 def resend_activation_email(request):
 
