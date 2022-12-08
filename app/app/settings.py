@@ -40,16 +40,22 @@ CSRF_TRUSTED_ORIGINS = ["http://localhost:8002", "http://127.0.0.1:8002"]
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+THIRD_PARTY_APPS = [
     'django_bootstrap5',
+]
+LOCAL_APPS = [
     'account.apps.AccountConfig',
 ]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -147,3 +153,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 AUTH_USER_MODEL = 'account.User'
 LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Mail
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+
+ACTIVATION_EXPIRED_DAYS = 3

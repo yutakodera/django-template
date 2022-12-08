@@ -1,0 +1,20 @@
+{% extends "base_centered.html" %}
+
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+    <h5 class="card-title text-center">アクティベーションメールを再送信</h5>
+    {% if form %}
+        <form method="POST">
+            {% bootstrap_form form layout='' %}
+            <button type="submit" class="btn btn-primary btn-block">再送信</button>
+            {% csrf_token %}
+        </form>
+    {% endif %}
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+
+{% endblock %}

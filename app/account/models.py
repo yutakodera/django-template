@@ -3,6 +3,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail
 from django.utils import timezone
+import uuid
+
 
 
 class UserManager(UserManager):
@@ -31,9 +33,8 @@ class UserManager(UserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(_('email address'), unique=True)
-
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -41,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     is_active = models.BooleanField(
         _('active'),
-        default=True,
+        default=False,
         help_text=_(
             'Designates whether this user should be treated as active. '
             'Unselect this instead of deleting accounts.'
@@ -66,3 +67,25 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+class UserActivateTokensManager(models.Manager):
+
+    def activate_user_by_token(self, activate_token):
+        user_activate_token = self.filter(
+            activate_token=activate_token,
+            expired_at__gte=timezone.now() # __gte = greater than equal
+        ).order_by('-expired_at').first()
+        if hasattr(user_activate_token, 'user'):
+            user = user_activate_token.user
+            user.is_active = True
+            user.save()
+            return user
+
+class UserActivateTokens(models.Model):
+
+    token_id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    activate_token = models.UUIDField(default=uuid.uuid4)
+    expired_at = models.DateTimeField()
+
+    objects = UserActivateTokensManager()

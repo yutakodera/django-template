@@ -1,0 +1,11 @@
+{% extends "base_centered.html" %}
+
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+    <h5>アカウントはまだ有効化されていません。</h5>
+    <p>アカウントを有効化するには、メールに記載されているリンクをクリックしてください。</p>
+    <p>メールが届かない場合は、<a href="{% url 'accounts:resend-activation' %}">こちら</a>から再送信してください。</p>
+
+{% endblock %}
