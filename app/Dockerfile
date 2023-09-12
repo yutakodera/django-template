@@ -31,9 +31,6 @@ COPY ./entrypoint.sh $APP_HOME
 # copy project
 COPY . $APP_HOME
 
-RUN touch ./logs/access.json && \
-    touch ./logs/access__flat_line.log
-
 # chown all the files to the app user
 RUN chown -R app:app $APP_HOME
 
