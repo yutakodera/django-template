@@ -3,6 +3,13 @@
 This is a template for Django projects. It is based on the [django-on-docker](https://github.com/dsonoda/django-on-docker) & [django-account-ja](https://github.com/motoitanigaki/django-account-ja) projects.
 
 ## Usage
+```
+cp .env.sample .env
+make init
+```
+
+
+## Usage
 ### Development
 ```bash
 docker-compose up -d --build
@@ -23,8 +30,7 @@ docker-compose exec app python manage.py startapp <app_name>
 ## License
 ### MIT License
 Copyright (C) 2020 dsonoda ([django-on-docker](https://github.com/dsonoda/django-on-docker))  
-Copyright (C) 2019 motoitanigaki ([django-account-ja](https://github.com/motoitanigaki/django-account-ja))  
-Copyright (C) 2022 RTa-technology ([Django-template](https://github.com/RTa-technology/Django-template))
+Copyright (C) 2022 R74 ([Django-template](https://github.com/RTa-technology/Django-template))
 
 This license as follows:  
 https://opensource.org/licenses/MIT
