@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3.10-alpine
+FROM python:3.12-alpine
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -17,11 +17,15 @@ RUN addgroup -S app && adduser -S app -G app
 # set work directory
 WORKDIR $APP_HOME
 
-# install dependencies
-COPY ./requirements.txt .
 RUN apk update && \
     apk add postgresql-dev gcc python3-dev musl-dev libpq && \
-    pip install --upgrade pip
+    pip install --upgrade pip && \
+    pip install uv
+
+ENV VIRTUAL_ENV=/usr/local
+
+# install dependencies
+COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt
 
@@ -30,9 +34,6 @@ COPY ./entrypoint.sh $APP_HOME
 
 # copy project
 COPY . $APP_HOME
-
-RUN touch ./logs/access.json && \
-    touch ./logs/access__flat_line.log
 
 # chown all the files to the app user
 RUN chown -R app:app $APP_HOME
