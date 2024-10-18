@@ -1,6 +1,6 @@
 # Django-template
 
-This is a template for Django projects. It is based on the [django-on-docker](https://github.com/dsonoda/django-on-docker) & [django-account-ja](https://github.com/motoitanigaki/django-account-ja) projects.
+This is a template for Django projects. It is based on the [django-on-docker](https://github.com/dsonoda/django-on-docker) projects.
 
 ## Usage
 ```
@@ -30,11 +30,9 @@ docker-compose exec app python manage.py startapp <app_name>
 ## License
 ### MIT License
 Copyright (C) 2020 dsonoda ([django-on-docker](https://github.com/dsonoda/django-on-docker))  
-Copyright (C) 2022 R74 ([Django-template](https://github.com/RTa-technology/Django-template))
 
 This license as follows:  
 https://opensource.org/licenses/MIT
 
 ## Acknowledgments
 - [django-on-docker](https://github.com/dsonoda/django-on-docker)
-- [django-account-ja](https://github.com/motoitanigaki/django-account-ja)
