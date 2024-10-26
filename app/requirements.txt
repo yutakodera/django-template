@@ -1,4 +1,4 @@
 gunicorn
 psycopg2-binary
 
-django==4.1.10
+django==5.1.2
