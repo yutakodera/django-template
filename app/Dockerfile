@@ -22,12 +22,10 @@ RUN apk update && \
     pip install --upgrade pip && \
     pip install uv
 
-ENV VIRTUAL_ENV=/usr/local
-
 # install dependencies
 COPY ./requirements.txt .
 
-RUN pip install -r requirements.txt
+RUN uv pip install --system -r requirements.txt
 
 # copy entrypoint shell file
 COPY ./entrypoint.sh $APP_HOME
