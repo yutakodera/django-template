@@ -28,3 +28,5 @@ createsuperuser:
 app/makeapp:
 	docker compose run --rm app python manage.py startapp $(name)
 
+rmall:
+	docker compose down --rmi all --volumes --remove-orphans

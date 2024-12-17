@@ -2,6 +2,7 @@ version: "3.7"
 
 services:
   app:
+    container_name: api
     build:
       context: ./app
       dockerfile: Dockerfile
@@ -23,6 +24,7 @@ services:
     restart: always
 
   db:
+    container_name: postgres
     image: postgres:14.6-alpine
     volumes:
       - db_data:/var/lib/postgresql/data/
@@ -33,6 +35,7 @@ services:
     restart: always
 
   nginx:
+    container_name: nginx
     build:
       context: ./nginx
       dockerfile: Dockerfile
