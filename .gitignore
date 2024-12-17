@@ -132,3 +132,5 @@ dmypy.json
 # logs
 app/logs/*
 !app/logs/.gitkeep
+
+.swp
