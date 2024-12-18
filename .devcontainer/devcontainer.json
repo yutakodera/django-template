@@ -1,0 +1,15 @@
+{
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/usr/src/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "MS-CEINTL.vscode-language-pack-ja",
+                "ms-python.python",
+                "ms-azuretools.vscode-docker",
+                "usernamehw.errorlens"
+            ]
+        }
+    }
+}
