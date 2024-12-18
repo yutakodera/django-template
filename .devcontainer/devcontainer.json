@@ -7,7 +7,6 @@
             "extensions": [
                 "MS-CEINTL.vscode-language-pack-ja",
                 "ms-python.python",
-                "ms-azuretools.vscode-docker",
                 "usernamehw.errorlens"
             ]
         }

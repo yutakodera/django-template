@@ -5,6 +5,9 @@ FROM python:3.12
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+# Use bash as default shell
+SHELL ["/bin/bash", "-c"]
+
 # create Django directory for the app user
 ENV APP_HOME=/usr/src/app
 RUN mkdir -p $APP_HOME && \
@@ -12,7 +15,10 @@ RUN mkdir -p $APP_HOME && \
     mkdir $APP_HOME/mediafiles
 
 # create the app user
-RUN groupadd -r app && useradd -r -g app app
+RUN groupadd -r app && \
+    useradd -r -g app -m -d /home/app app -s /bin/bash && \
+    mkdir -p /home/app && \
+    chown -R app:app /home/app
 
 # set work directory
 WORKDIR $APP_HOME
