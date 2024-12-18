@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3.12-alpine
+FROM python:3.12
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -12,14 +12,19 @@ RUN mkdir -p $APP_HOME && \
     mkdir $APP_HOME/mediafiles
 
 # create the app user
-RUN addgroup -S app && adduser -S app -G app
+RUN groupadd -r app && useradd -r -g app app
 
 # set work directory
 WORKDIR $APP_HOME
 
-RUN apk update && \
-    apk add postgresql-dev gcc python3-dev musl-dev libpq && \
-    pip install --upgrade pip && \
+# install system dependencies for PostgreSQL and Python libraries
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    netcat-openbsd postgresql-client libpq-dev gcc python3-dev build-essential && \
+    rm -rf /var/lib/apt/lists/*
+
+# upgrade pip and install uv
+RUN pip install --upgrade pip && \
     pip install uv
 
 # install dependencies
