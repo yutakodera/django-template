@@ -15,10 +15,8 @@ RUN mkdir -p $APP_HOME && \
     mkdir $APP_HOME/mediafiles
 
 # create the app user
-RUN groupadd -r app && \
-    useradd -r -g app -m -d /home/app app -s /bin/bash && \
-    mkdir -p /home/app && \
-    chown -R app:app /home/app
+RUN groupadd -g 1000 app && \
+    useradd -m -u 1000 -g 1000 app -s /bin/bash
 
 # set work directory
 WORKDIR $APP_HOME
@@ -26,8 +24,13 @@ WORKDIR $APP_HOME
 # install system dependencies for PostgreSQL and Python libraries
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    netcat-openbsd postgresql-client libpq-dev gcc python3-dev build-essential && \
+    sudo passwd lsof netcat-openbsd libpq-dev gcc python3-dev libc6 libc6-dev && \
     rm -rf /var/lib/apt/lists/*
+
+# set root password and add app user to sudo group
+RUN echo "root:root" | chpasswd && \
+    echo "app:app" | chpasswd && \
+    usermod -aG sudo app
 
 # upgrade pip and install uv
 RUN pip install --upgrade pip && \
@@ -42,7 +45,7 @@ RUN uv pip install --system -r requirements.txt
 COPY ./entrypoint.sh $APP_HOME
 
 # copy project
-COPY . $APP_HOME
+COPY --chown=app:app . $APP_HOME
 
 # chown all the files to the app user
 RUN chown -R app:app $APP_HOME
