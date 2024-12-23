@@ -1,7 +1,6 @@
 import hashlib
 import os
 import django
-from django.contrib.auth.models import User
 
 
 # Django設定を読み込む
@@ -9,6 +8,9 @@ os.environ.setdefault(
     "DJANGO_SETTINGS_MODULE", "app.settings"
 )  # プロジェクト名に合わせて変更
 django.setup()
+
+
+from django.contrib.auth.models import User
 
 
 def create_user_with_md5(username, password):
@@ -28,6 +30,6 @@ def create_user_with_md5(username, password):
 
 # 実行
 if __name__ == "__main__":
-    username = "50M24146"
-    password = "50M24146"
+    username = "123123123"
+    password = "123123123"
     create_user_with_md5(username, password)
