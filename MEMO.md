@@ -12,12 +12,12 @@ make init
 ```
 
 ## ユーザ登録
-デフォルトでは`Username=123123123, Password=123123123`が登録される
-`create_user.py`を編集することで登録ユーザを変更可能
 ```
 docker compose exec app bash
 python create_user.py
 ```
+デフォルトでは`Username=123123123, Password=123123123`が登録される
+`create_user.py`を編集することで登録ユーザを変更可能
 
 ## コンテナに入る
 ```bash
