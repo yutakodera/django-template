@@ -47,9 +47,7 @@ make rmall
 ```bash
 docker compose exec app bash
 ```
-- `api_post.py`
-    - APIにPOSTリクエストを送信する．
-- `md5_hash.py`
-    - パスワードのMD5ハッシュを生成する．
+- `get_test.py`
+    - `http://10.2.17.66/cgi-bin/cgi.py`にGETリクエストを送る．
 - `create_user.py`
     - MD5ハッシュ化されたパスワードを有するユーザを作成する．
