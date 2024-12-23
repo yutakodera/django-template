@@ -20,15 +20,16 @@ from django.urls import path, include
 from django.http import HttpResponseRedirect
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     path(
-        "", lambda request: HttpResponseRedirect("/co2data/table/")
-    ),  # co2data/table/にリダイレクト
+        "", lambda request: HttpResponseRedirect("/co2data/")
+    ),  # co2data/にリダイレクト
     path("admin/", admin.site.urls),
     path("co2data/", include("co2data.urls")),
     path(
         "login/",
-        auth_views.LoginView.as_view(template_name="co2data/login.html"),
+        auth_views.LoginView.as_view(template_name="login.html"),
         name="login",
     ),
     path("logout/", auth_views.LogoutView.as_view(next_page="/login/"), name="logout"),

@@ -32,6 +32,10 @@ make rmall
 ```
 
 ## Pythonスクリプト
+コンテナ内で実行する
+```bash
+docker compose exec app bash
+```
 - `api_post.py`
     - APIにPOSTリクエストを送信する．
 - `md5_hash.py`

@@ -1,16 +1,14 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import co2_data_table, Co2DataListCreateView
+from .views import display_co2_data, render_json_response
 
 
 urlpatterns = [
-    # APIエンドポイント
-    path("api/", Co2DataListCreateView.as_view(), name="co2data-api"),
-    # WebアプリのURL
-    path("table/", co2_data_table, name="co2data-table"),
+    path("", display_co2_data, name="display_co2_data"),
+    path("fetch-json/", render_json_response, name="render_json_response"),
     path(
         "login/",
-        auth_views.LoginView.as_view(template_name="co2data/login.html"),
+        auth_views.LoginView.as_view(template_name="login.html"),
         name="login",
     ),
     path("logout/", auth_views.LogoutView.as_view(next_page="/login/"), name="logout"),

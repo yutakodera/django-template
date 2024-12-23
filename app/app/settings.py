@@ -150,7 +150,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = "/login/"
-LOGIN_REDIRECT_URL = "/co2data/table/"
+LOGIN_REDIRECT_URL = "/co2data/"
 LOGOUT_REDIRECT_URL = "/login/"
 
 PASSWORD_HASHERS = [

@@ -22,12 +22,13 @@ def create_user_with_md5(username, password):
         user.is_active = True  # ユーザを有効化
         user.save()
         print(f"User '{username}' created successfully with MD5 hashed password.")
+        print(f"Password '{password}' hashed to '{hashed_password}'.")
     else:
         print(f"User '{username}' already exists.")
 
 
 # 実行
 if __name__ == "__main__":
-    username = "50M24146"
-    password = "50M24146"
+    username = "123123123"
+    password = "123123123"
     create_user_with_md5(username, password)
