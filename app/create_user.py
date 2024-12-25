@@ -1,6 +1,7 @@
+import django
 import hashlib
 import os
-import django
+import sys
 
 
 # Django設定を読み込む
@@ -30,6 +31,12 @@ def create_user_with_md5(username, password):
 
 # 実行
 if __name__ == "__main__":
-    username = "123123123"
-    password = "123123123"
-    create_user_with_md5(username, password)
+    args = sys.argv()
+    if len(args) == 3:
+        username = args[1]
+        password = args[2]
+        args = sys.argv()
+        create_user_with_md5(username, password)
+    else:
+        print("Usage: python create_user.py <username> <password>")
+        sys.exit(1)
