@@ -1,5 +1,17 @@
 # ネットワークプログラミング実験
 
+## 全体の流れ
+1. Dockerfile, docker-compose.ymlを作成
+    - Python (Django, gunicorn)
+    - PostgreSQL
+    - Nginx
+2. コンテナをビルドし起動
+3. Pythonコンテナの中でDjangoプロジェクトを作成
+4. Djangoアプリケーションを作成
+5. APIを作成
+6. CO2データを表示するページを作成
+7. ユーザ認証を設定
+
 ## インストール
 - WSL2
 - Docker Desktop
