@@ -66,6 +66,7 @@ docker compose exec app bash
 
 
 ## MD5ハッシュ衝突実験
+参考：[https://burion.net/entry/2024/01/12/012723](https://burion.net/entry/2024/01/12/012723)
 - HashClashというプロジェクトを使って実験する
 - ハッシュが衝突する入力のペアを見つける
 
