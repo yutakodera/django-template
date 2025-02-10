@@ -36,3 +36,5 @@ https://opensource.org/licenses/MIT
 
 ## Acknowledgments
 - [django-on-docker](https://github.com/dsonoda/django-on-docker)
+- [djang0-template](https://github.com/r74tech/django-template)
+
