@@ -85,9 +85,8 @@ docker compose exec app bash
     - MD5ハッシュ化されたパスワードを有するユーザを作成する
 
 ## MD5ハッシュ衝突実験<a id="MD5ハッシュ衝突実験"></a>
-参考：[https://burion.net/entry/2024/01/12/012723](https://burion.net/entry/2024/01/12/012723)
-- HashClashというプロジェクトを使って実験する
-- ハッシュが衝突する入力のペアを見つける
+- [HashClash](https://github.com/cr-marcstevens/hashclash)を用いて，ハッシュが衝突する入力のペアを見つける
+- 参考：[https://burion.net/entry/2024/01/12/012723](https://burion.net/entry/2024/01/12/012723)
 
 ### コンテナに入る
 ```bash
