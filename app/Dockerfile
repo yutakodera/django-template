@@ -47,9 +47,6 @@ COPY ./entrypoint.sh $APP_HOME
 # copy project
 COPY --chown=app:app . $APP_HOME
 
-# chown all the files to the app user
-RUN chown -R app:app $APP_HOME
-
 # change to the app user
 USER app
 
