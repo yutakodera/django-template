@@ -1,32 +1,74 @@
-init:
-	make build
-	make db/flush
-	make db/makemigrations
-	make db/migrate
-	make collectstatic
-	make createsuperuser
+# Variables
+COMPOSE_FILE = docker-compose.yml
+DOCKER_COMPOSE = docker compose -f $(COMPOSE_FILE)
+DOCKER_EXEC = $(DOCKER_COMPOSE) exec
+DOCKER_RUN = $(DOCKER_COMPOSE) run --rm
+APP_SERVICE = app
 
+.PHONY: init dev build up down restart logs status prune help db-shell collectstatic migrate
 
-build:
-	docker compose up -d --build
+# Development Commands
+init: build migrate collectstatic createsuperuser ## Initialize project for first time setup
+	@echo "Project initialized successfully!"
 
-db/flush:
-	docker compose run --rm app python manage.py flush --no-input
+# Docker Commands
+build: ## Build or rebuild services
+	$(DOCKER_COMPOSE) up -d --build
 
-db/makemigrations:
-	docker compose run --rm app python manage.py makemigrations
+up: ## Start all services
+	$(DOCKER_COMPOSE) up -d
 
-db/migrate:
-	docker compose run --rm app python manage.py migrate
+down: ## Stop all services
+	$(DOCKER_COMPOSE) down
 
-collectstatic:
-	docker compose run --rm app python manage.py collectstatic --no-input
+restart: down up ## Restart all services
 
-createsuperuser:
-	docker compose run --rm app python manage.py createsuperuser
+status: ## Show status of services
+	$(DOCKER_COMPOSE) ps
 
-app/makeapp:
-	docker compose run --rm app python manage.py startapp $(name)
+logs: ## View logs from all services
+	$(DOCKER_COMPOSE) logs -f
 
+logs-app: ## View logs from Django app
+	$(DOCKER_COMPOSE) logs -f $(APP_SERVICE)
+
+# Database Commands
+migrate: db-makemigrations db-migrate ## Run database migrations
+
+db-shell: ## Access database shell
+	$(DOCKER_EXEC) db psql -U postgres
+
+db-makemigrations: ## Generate database migrations
+	$(DOCKER_RUN) $(APP_SERVICE) python manage.py makemigrations
+
+db-migrate: ## Apply database migrations
+	$(DOCKER_RUN) $(APP_SERVICE) python manage.py migrate
+
+db-flush: ## Flush database
+	$(DOCKER_RUN) $(APP_SERVICE) python manage.py flush --no-input
+
+# Static Files
+collectstatic: ## Collect static files
+	$(DOCKER_RUN) $(APP_SERVICE) python manage.py collectstatic --no-input
+
+# User Management
+createsuperuser: ## Create a superuser
+	$(DOCKER_RUN) $(APP_SERVICE) python manage.py createsuperuser
+
+# App Management
+app-create: ## Create a new Django app (usage: make app-create name=myapp)
+	$(DOCKER_RUN) $(APP_SERVICE) python manage.py startapp $(name)
+
+# Rebuild
+rebuild: migrate collectstatic build
+
+# Clean Up
 rmall:
-	docker compose down --rmi all --volumes --remove-orphans
+	$(DOCKER_COMPOSE) down --rmi all --volumes --remove-orphans
+
+# Help
+help: ## Show this help message
+	@echo 'Usage: make [target]'
+	@echo ''
+	@echo 'Targets:'
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  %-20s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
