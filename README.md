@@ -5,26 +5,26 @@ This is a template for Django projects. It is based on the [django-on-docker](ht
 ## Usage
 ```
 cp .env.sample .env
-make init
+sudo make init
 ```
 
 
 ## Usage
 ### Development
 ```bash
-docker compose up -d --build
+sudo docker-compose up -d --build
 ```
 ```bash
-docker compose exec app python manage.py flush --no-input
-docker compose exec app python manage.py makemigrations
-docker compose exec app python manage.py migrate
-docker compose exec app python manage.py collectstatic --no-input --clear
-docker compose exec app python manage.py createsuperuser
+sudo docker-compose exec app python manage.py flush --no-input
+sudo docker-compose exec app python manage.py makemigrations
+sudo docker-compose exec app python manage.py migrate
+sudo docker-compose exec app python manage.py collectstatic --no-input --clear
+sudo docker-compose exec app python manage.py createsuperuser
 ```
 ----
 ### Make a new app
 ```bash
-docker compose exec app python manage.py startapp <app_name>
+sudo docker-compose exec app python manage.py startapp <app_name>
 ```
 
 ## License
