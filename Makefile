@@ -1,6 +1,6 @@
 # Variables
 COMPOSE_FILE = docker-compose.yml
-DOCKER_COMPOSE = docker compose -f $(COMPOSE_FILE)
+DOCKER_COMPOSE = docker-compose -f $(COMPOSE_FILE)
 DOCKER_EXEC = $(DOCKER_COMPOSE) exec
 DOCKER_RUN = $(DOCKER_COMPOSE) run --rm
 APP_SERVICE = app
