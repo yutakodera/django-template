@@ -95,10 +95,11 @@ docker compose up -d --build
 docker compose exec ubuntu bash
 ```
 
-### HashClashをクローンしてビルド
+### HashClashをクローン，必要なツールをインストールし，ビルド
 ```bash
 git clone https://github.com/cr-marcstevens/hashclash.git
 cd hashclash
+sudo apt install -y g++ make autoconf automake libtool zlib1g-dev libbz2-dev
 bash ./build.sh
 ```
 
